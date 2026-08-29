@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Fieldstone Goods</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="admin-body">
+
+<!-- Login gate -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-card">
+    <span class="logo-mark" style="margin:0 auto 18px; display:flex;">FG</span>
+    <h2>Admin sign-in</h2>
+    <p class="sub">Manage the Fieldstone Goods catalog and orders.</p>
+    <form id="loginForm">
+      <div class="field" style="text-align:left;">
+        <label>Password</label>
+        <input type="password" id="passwordInput" placeholder="Enter admin password" autofocus>
+      </div>
+      <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center; margin-top:6px;">Sign in</button>
+      <p class="login-error" id="loginError">That password isn't right — try again.</p>
+    </form>
+    <p class="login-hint">Demo password: fieldstone2026</p>
+  </div>
+</div>
+
+<!-- Admin shell -->
+<div class="admin-shell" id="adminShell" style="display:none;">
+  <aside class="admin-sidebar">
+    <a href="index.html" class="logo">
+      <span class="logo-mark">FG</span>
+      <span class="logo-text">Fieldstone Goods<small>Admin</small></span>
+    </a>
+    <button class="side-link active" data-view="dashboard">📊 Dashboard</button>
+    <button class="side-link" data-view="products">📦 Products</button>
+    <button class="side-link" data-view="orders">🧾 Orders</button>
+    <div class="sidebar-foot">
+      <a href="index.html">← Back to store</a>
+      <button id="logoutBtn">Sign out</button>
+    </div>
+  </aside>
+
+  <main class="admin-main">
+    <!-- Dashboard -->
+    <section class="view active" id="view-dashboard">
+      <div class="admin-topbar">
+        <div>
+          <h1>Dashboard</h1>
+          <p>A quick read on the shop right now.</p>
+        </div>
+      </div>
+      <div class="stat-grid">
+        <div class="stat-card"><div class="label">Products</div><div class="value" id="statProducts">0</div></div>
+        <div class="stat-card"><div class="label">Out of stock</div><div class="value rust" id="statOOS">0</div></div>
+        <div class="stat-card"><div class="label">Orders</div><div class="value" id="statOrders">0</div></div>
+        <div class="stat-card"><div class="label">Revenue</div><div class="value" id="statRevenue">$0</div></div>
+      </div>
+      <div class="table-toolbar">
+        <h3 style="font-size:16px; color:var(--pine);">Recent orders</h3>
+      </div>
+      <div class="table-card">
+        <table>
+          <thead><tr><th>Order</th><th>Customer</th><th>Items</th><th>Total</th><th>Status</th></tr></thead>
+          <tbody id="recentOrdersBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Products -->
+    <section class="view" id="view-products">
+      <div class="admin-topbar">
+        <div>
+          <h1>Products</h1>
+          <p>Add, edit, or retire items from the catalog.</p>
+        </div>
+        <button class="btn btn-primary" id="addProductBtn">+ Add product</button>
+      </div>
+      <div class="table-card">
+        <table>
+          <thead><tr><th>Product</th><th>Category</th><th>Price</th><th>Stock</th><th>Status</th><th></th></tr></thead>
+          <tbody id="productsBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Orders -->
+    <section class="view" id="view-orders">
+      <div class="admin-topbar">
+        <div>
+          <h1>Orders</h1>
+          <p>Track and update order status.</p>
+        </div>
+      </div>
+      <div class="table-card">
+        <table>
+          <thead><tr><th>Order</th><th>Customer</th><th>Placed</th><th>Items</th><th>Total</th><th>Status</th></tr></thead>
+          <tbody id="ordersBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- Product modal -->
+<div class="modal-overlay" id="productModalOverlay">
+  <div class="modal">
+    <button class="modal-close" id="closeProductModal">✕</button>
+    <h3 id="productModalTitle">Add product</h3>
+    <p class="sub">This updates the live catalog immediately.</p>
+    <form id="productForm">
+      <input type="hidden" id="productId">
+      <div class="field"><label>Name</label><input type="text" id="fName" required></div>
+      <div class="field-row">
+        <div class="field"><label>Category</label>
+          <select id="fCategory">
+            <option>Pantry</option><option>Home</option><option>Apothecary</option><option>Garden</option>
+          </select>
+        </div>
+        <div class="field"><label>SKU</label><input type="text" id="fSku" required></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>Price (USD)</label><input type="number" id="fPrice" step="0.01" min="0" required></div>
+        <div class="field"><label>Stock</label><input type="number" id="fStock" min="0" step="1" required></div>
+      </div>
+      <div class="field"><label>Unit label</label><input type="text" id="fUnit" placeholder="jar · 8oz"></div>
+      <div class="field"><label>Description</label><textarea id="fDesc" required></textarea></div>
+      <div class="field"><label>Badge (optional)</label>
+        <select id="fBadge"><option value="">None</option><option>New</option><option>Bestseller</option></select>
+      </div>
+      <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center; margin-top:8px;">Save product</button>
+    </form>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="js/data.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

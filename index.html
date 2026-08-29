@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fieldstone Goods — Pantry, Home & Garden</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="logo">
+      <span class="logo-mark">FG</span>
+      <span class="logo-text">Fieldstone Goods<small>Est. Local Trading Co.</small></span>
+    </a>
+    <nav>
+      <ul class="main-nav">
+        <li><a href="#shop">Shop</a></li>
+        <li><a href="#pantry">Pantry</a></li>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#garden">Garden</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a class="admin-link" href="admin.html">Admin panel</a>
+      <button class="icon-btn" id="cartBtn" aria-label="Open cart">
+        🧺
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <div class="hero-eyebrow">Fresh Stock, Weekly</div>
+      <h1>Provisions for a <em>slower</em> kind of household.</h1>
+      <p class="lede">Small-batch pantry staples, hand-tooled home goods, and seed stock — sourced from growers and makers within sixty miles of the shop counter.</p>
+      <div class="hero-ctas">
+        <a href="#shop" class="btn btn-primary">Shop the catalog →</a>
+        <a href="admin.html" class="btn btn-outline">Manage inventory</a>
+      </div>
+    </div>
+    <div class="crate">
+      <div class="stamp">
+        <div class="cap">Fieldstone Goods</div>
+        <div class="num" id="productTotal">10</div>
+        <div class="div"></div>
+        <div class="cap">Items in stock today</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="chip-rail">
+  <div class="wrap" id="chipRail">
+    <button class="chip active" data-cat="All">All goods</button>
+    <button class="chip" data-cat="Pantry">Pantry</button>
+    <button class="chip" data-cat="Home">Home</button>
+    <button class="chip" data-cat="Apothecary">Apothecary</button>
+    <button class="chip" data-cat="Garden">Garden</button>
+    <div class="search-box">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="searchInput" placeholder="Search the catalog…">
+    </div>
+  </div>
+</section>
+
+<section class="section" id="shop">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>This week's catalog</h2>
+      <span class="count mono" id="resultCount">10 items</span>
+    </div>
+    <div class="grid" id="productGrid"></div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>© 2026 Fieldstone Goods. A demo storefront built for learning.</p>
+    <ul class="foot-links">
+      <li><a href="admin.html">Admin panel</a></li>
+      <li><a href="#shop">Shop</a></li>
+    </ul>
+  </div>
+</footer>
+
+<!-- Cart drawer -->
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="cartDrawer" aria-label="Shopping cart">
+  <div class="drawer-head">
+    <h3>Your basket</h3>
+    <button class="icon-btn" id="closeCart" aria-label="Close cart">✕</button>
+  </div>
+  <div class="drawer-body" id="cartBody"></div>
+  <div class="drawer-foot">
+    <div class="total-row"><span>Total</span><span id="cartTotal">$0.00</span></div>
+    <button class="btn btn-rust" id="checkoutBtn" style="width:100%; justify-content:center;">Checkout</button>
+  </div>
+</aside>
+
+<!-- Checkout modal -->
+<div class="modal-overlay" id="checkoutOverlay">
+  <div class="modal">
+    <button class="modal-close" id="closeCheckout">✕</button>
+    <h3>Checkout</h3>
+    <p class="sub">This is a demo — no real payment is taken. Placing an order saves it locally and it'll appear in the admin panel.</p>
+    <form id="checkoutForm">
+      <div class="field"><label>Full name</label><input type="text" required name="name" placeholder="Jordan Ellis"></div>
+      <div class="field"><label>Email</label><input type="email" required name="email" placeholder="jordan@example.com"></div>
+      <div class="field"><label>Shipping address</label><textarea required name="address" placeholder="120 Ridge Road, Millbrook"></textarea></div>
+      <div class="field-row">
+        <div class="field"><label>City</label><input type="text" required name="city" placeholder="Millbrook"></div>
+        <div class="field"><label>ZIP</label><input type="text" required name="zip" placeholder="12545"></div>
+      </div>
+      <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center; margin-top:8px;">Place order</button>
+    </form>
+  </div>
+</div>
+
+<!-- Order confirmation modal -->
+<div class="modal-overlay" id="confirmOverlay">
+  <div class="modal">
+    <button class="modal-close" id="closeConfirm">✕</button>
+    <div class="confirm-icon">✓</div>
+    <h3>Order placed</h3>
+    <p class="sub">Thanks — your order has been recorded.</p>
+    <div class="order-id mono" id="confirmOrderId"></div>
+    <button class="btn btn-outline" id="doneConfirm" style="width:100%; justify-content:center;">Continue shopping</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="js/data.js"></script>
+<script src="js/store.js"></script>
+</body>
+</html>
